@@ -28,7 +28,12 @@ io.on('connection', (socket) => {
 
     //chatメッセージの受信
     socket.on('chat_message', (data) => {
+        console.log(socket.id);
         console.log(data);
+        //送信ユーザのSocketIDを追加
+        data.socket_id = socket.id;
+        //接続しているユーザにメッセージを送信
+        io.emit('chat_message', data);
     })
 })
 
